@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Url Check</title>
+	
+	<script>
+		var goTo = function() {
+            var mss = document.getElementById("rlMessage");
+            var urlCheck = document.getElementById("urlInput");
+			var regex = new RegExp("(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})");
+            var shortMatch =/([^\s]+\.[^\s]{2,})/;
+            console.log(urlCheck.value );
+            if(regex.test(urlCheck.value)){
+                //document.getElementById("rlMessage").innerHTML="<span>Successful match</span>";
+                window.open(urlCheck.value, '_self');
+            }else if(shortMatch.test(urlCheck.value)){
+                var url = urlCheck.value;
+                 if (!url.match(/^https?:\/\//i)) {
+                        url = 'http://' + url;
+                    }
+                   window.open(url, , '_self');
+                document.getElementById("rlMessage").innerHTML = "";
+            }else{
+                 document.getElementById("rlMessage").innerHTML = "<span>Invalid url! Please input valid url and try again!</span>";
+            }
+            return false;
+		}
+    </script>
+    <style>
+        .container {
+           padding-top: 150px;
+        }
+        .frmSubmit {
+            margin: 0 auto;
+            width: 350px;
+            padding-top: 150px;
+            padding: 20px;
+            border: 1px solid #e4e3e3;
+        }
+        .frmSubmit div{
+            margin-bottom: 15px;
+            
+        }
+        .error {
+            color: red;
+        }
+        input {
+            border: 1px solid #e4e3e3;
+            height: 35px;
+            width: 70%;
+            padding:0 10px;
+        }
+        button {
+            border: none;
+            background: #e4e3e3;
+            padding: 7px 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+      
+        <div class="frmSubmit">
+              <h4>Input Url Form: </h4>
+            <form onsubmit="return goTo()">
+                <div><input id="urlInput" type="text" placeholder="Enter url here"/></div>
+                <div><span class="error" id="rlMessage"></span></div>
+                <div><button type="submit">Goto</button></div>
+                
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
